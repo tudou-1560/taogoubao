@@ -8,7 +8,7 @@
 
     <!-- 巴功阁 -->
     <van-grid :column-num="4" :border="false">
-      <van-grid-item icon="photo-o" >
+      <van-grid-item icon="photo-o" to="/goodslist">
         <img src="../assets/images/menu10.png" alt />
         <span>数码电器</span>
       </van-grid-item>
@@ -38,7 +38,7 @@
       </van-grid-item>
       <van-grid-item icon="photo-o">
         <img src="../assets/images/menu17.png" alt />
-        <span>数码电器</span>
+        <span>全部</span>
       </van-grid-item>
     </van-grid>
     <!-- 分割线 -->

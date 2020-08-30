@@ -1,7 +1,7 @@
 <template>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <div class="newslist">
-            <div class="newsitem" v-for="item in newslist" :key="item.id">
+            <div class="newsitem" v-for="item in newslist" :key="item.id" >
                 <div class="img-left">
                     <img :src="item.img_url" alt="">
                 </div>
@@ -45,7 +45,8 @@
                 pageSize:10,
                 isLoading: false,
                 isMore:false,
-                hasDate:true
+                hasDate:true,
+                isLoading:false,
                 
             }
         },
