@@ -13,13 +13,14 @@
               :title="title"
               left-text="返回"
               left-arrow
+               @click-left="onClickLeft"
           />
       </div>
     </van-sticky>
 
     <router-view></router-view>
     <!-- 底部 -->
-    <van-tabbar v-model="active">
+    <van-tabbar v-model="active"  :route="true">
       <van-tabbar-item to="/home" icon="wap-home-o">首页</van-tabbar-item>
       <van-tabbar-item to="/mycar" icon="cart-o" badge="0" >购物车</van-tabbar-item>
       <van-tabbar-item to="/userinfo" icon="user-o" >我的乐淘</van-tabbar-item>
@@ -35,11 +36,14 @@ export default {
       value: "",
       active: 0,
       bool:true,
-      title:""
+      title:"",
+
     };
   },
   methods:{
-    
+    onClickLeft(){
+      this.$router.go(-1)
+    }
   },
   components: {
     "van-search": Search,
@@ -48,25 +52,25 @@ export default {
     "van-sticky": Sticky,
     "van-nav-bar":NavBar
   },
-  watch:{
-    "$route":function(oldPath,newPath){
+  // watch:{
+  //   "$route":function(oldPath,newPath){
 
-      var mypath = oldPath.path;
-      console.log(mypath);
-      if(mypath == "/home"){
-        this.bool = true;
-        this.active = 0
-      }else if(mypath == "/mycar"){
-        this.bool = false;
-        this.active = 1;
-      }else if(mypath == "/userinfo"){
-        this.bool = false;
-        this.active = 2
-      }
+  //     var mypath = oldPath.path;
+  //     console.log(mypath);
+  //     if(mypath == "/home"){
+  //       this.bool = true;
+  //       this.active = 0
+  //     }else if(mypath == "/mycar"){
+  //       this.bool = false;
+  //       this.active = 1;
+  //     }else if(mypath == "/userinfo"){
+  //       this.bool = false;
+  //       this.active = 2
+  //     }
       
       
-    }
-  }
+  //   }
+  // }
 };
 </script>
 

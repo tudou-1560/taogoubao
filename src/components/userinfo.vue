@@ -1,6 +1,6 @@
 <template>
     <div>
-        个人中心
+        个人中心 
     </div>
 </template>
 
@@ -8,11 +8,13 @@
     export default {
         data(){
             return{
-
+                
             }
         },
         created(){
-            this.$parent.title="个人中心"
+            this.$parent.title="个人中心";
+            this.$parent.bool = false;
+            this.$parent.active = 2;
         }
     }
 </script>

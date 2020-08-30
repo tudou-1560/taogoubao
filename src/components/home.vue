@@ -6,12 +6,13 @@
       </van-swipe-item>
     </van-swipe>
 
+    <!-- 巴功阁 -->
     <van-grid :column-num="4" :border="false">
-      <van-grid-item icon="photo-o">
+      <van-grid-item icon="photo-o" >
         <img src="../assets/images/menu10.png" alt />
         <span>数码电器</span>
       </van-grid-item>
-      <van-grid-item icon="photo-o">
+      <van-grid-item icon="photo-o" to="/newlist">
         <img src="../assets/images/menu19.png" alt />
         <span>乐淘头条</span>
       </van-grid-item>
@@ -100,6 +101,8 @@ export default {
   created() {
     this.getlunbo();
     this.getgoods();
+    this.$parent.bool = true;
+    this.$parent.active = 0;
   },
 };
 </script>
