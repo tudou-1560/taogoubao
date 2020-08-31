@@ -49,7 +49,7 @@
     <!-- 推荐内容 -->
     <div class="goodlist">
       <ul>
-        <li v-for="item in goodslist" :key="item.id">
+        <li v-for="item in goodslist" :key="item.id" @click="getDesc(item.id)" >
           <div class="item-img">
             <img :src="item.img_url" alt="" />
           </div>
@@ -96,6 +96,9 @@ export default {
     async getgoods(){
         var res = await getGoodsData(6);
         this.goodslist = res.message;
+    },
+    getDesc(goodId){
+       this.$router.push(`/goodsdesc/${goodId}`);
     }
   },
   created() {
@@ -140,7 +143,7 @@ export default {
   .goodlist {
     background-color: rgb(231, 231, 231);
     margin: 0 auto;
-    ul {
+     ul {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;

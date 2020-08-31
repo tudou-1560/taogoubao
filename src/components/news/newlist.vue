@@ -1,7 +1,7 @@
 <template>
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <div class="newslist">
-            <div class="newsitem" v-for="item in newslist" :key="item.id" >
+            <div class="newsitem" v-for="item in newslist" :key="item.id" @click="getDesc(item.id)">
                 <div class="img-left">
                     <img :src="item.img_url" alt="">
                 </div>
@@ -85,7 +85,11 @@
                 this.page ++;
                 this.isMore = true;
                 this.getnews();
-            }
+            },
+            //点击跳转到新闻详情页面
+            getDesc(newId){
+                this.$router.push(`/getnewdetail/${newId}`);
+            }   
   
             
         },

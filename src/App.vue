@@ -9,27 +9,38 @@
         </div>
 
         <div v-else>
-          <van-nav-bar 
-              :title="title"
-              left-text="返回"
-              left-arrow
-               @click-left="onClickLeft"
-          />
-      </div>
+            <van-nav-bar 
+                :title="title"
+                left-text="返回"
+                left-arrow
+                @click-left="onClickLeft"
+            />
+        </div>
     </van-sticky>
 
     <router-view></router-view>
     <!-- 底部 -->
-    <van-tabbar v-model="active"  :route="true">
-      <van-tabbar-item to="/home" icon="wap-home-o">首页</van-tabbar-item>
-      <van-tabbar-item to="/mycar" icon="cart-o" badge="0" >购物车</van-tabbar-item>
-      <van-tabbar-item to="/userinfo" icon="user-o" >我的乐淘</van-tabbar-item>
-    </van-tabbar>
+        <van-tabbar v-model="active"  :route="true" v-if="flag">
+          <van-tabbar-item to="/home" icon="wap-home-o">首页</van-tabbar-item>
+          <van-tabbar-item to="/mycar" icon="cart-o" badge="0" >购物车</van-tabbar-item>
+          <van-tabbar-item to="/userinfo" icon="user-o" >我的乐淘</van-tabbar-item>
+        </van-tabbar>
+
+        <div v-else>
+            <van-goods-action>
+                <van-goods-action-icon icon="cart-o" text="购物车" badge="" />
+                <van-goods-action-icon icon="shop-o" text="店铺" badge="" />
+                <van-goods-action-button type="warning" text="加入购物车" />
+                <van-goods-action-button type="danger" text="立即购买" />
+            </van-goods-action>
+        </div>
+    
+
   </div>
 </template>
 
 <script>
-import { Search, Tabbar, TabbarItem, Sticky ,NavBar } from "vant";
+import { Search, Tabbar, TabbarItem, Sticky ,NavBar,GoodsAction, GoodsActionIcon, GoodsActionButton  } from "vant";
 export default {
   data() {
     return {
@@ -37,6 +48,7 @@ export default {
       active: 0,
       bool:true,
       title:"",
+      flag:true,
 
     };
   },
@@ -50,7 +62,11 @@ export default {
     "van-tabbar": Tabbar,
     "van-tabbar-item": TabbarItem,
     "van-sticky": Sticky,
-    "van-nav-bar":NavBar
+    "van-nav-bar":NavBar,
+    "van-goods-action":GoodsAction,
+    "van-goods-action-icon":GoodsActionIcon,
+    "van-goods-action-button":GoodsActionButton
+
   },
   // watch:{
   //   "$route":function(oldPath,newPath){
@@ -67,11 +83,22 @@ export default {
   //       this.bool = false;
   //       this.active = 2
   //     }
-      
-      
   //   }
   // }
-};
+  watch:{
+    "$route":function(oldPath,newPath){
+
+      var mypath = oldPath.path.split("/")[1];
+      // console.log(newPath.path);
+      // console.log(mypath.split("/")[1]);
+      if(mypath == "goodsdesc"){
+        this.flag = false;
+      }else{
+        this.flag = true;
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

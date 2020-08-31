@@ -20,3 +20,23 @@ export function getGoodslistData(pageNum){
 export function getdetaillunbo(goodId){
   return instance.get(`./getthumbimages/${goodId}`)
 }
+
+//获取商品详情文字描述
+export function getdetailinfo(goodId){
+  return instance.get(`./getgoodsinfo/${goodId}`)
+}
+
+
+//获取新闻详情数据
+export function getnewdetail(newId){
+  return instance.get(`./getnew/${newId}`)
+}
+
+//获取评论列表数据
+export function getcommentdata(id,pageindex){
+  return instance.get(`./getcomments/${id}?pageindex=${pageindex}`)
+}
+//添加评论
+export function postcommentdata(id){
+  return instance.post(`./postcomment/${id}`)
+}

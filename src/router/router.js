@@ -9,6 +9,7 @@ import userinfo from "@/components/userinfo.vue";
 import newlist from "@/components/news/newlist.vue";
 import goodslist from "@/components/goods/goodslist.vue";
 import goodsdesc from "@/components/goods/goodsdesc.vue";
+import newsdesc from "@/components/news/newdesc.vue";
 const router = new VueRouter({
   routes :[
     {path: '/', redirect: 'home'},
@@ -18,6 +19,7 @@ const router = new VueRouter({
     {path: '/newlist',component:newlist},
     {path: '/goodslist',component:goodslist},
     {path : '/goodsdesc/:goodId',component:goodsdesc},
+    {path : '/getnewdetail/:newId',component:newsdesc},
 
   ]
 })
