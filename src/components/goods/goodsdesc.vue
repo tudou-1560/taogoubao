@@ -36,11 +36,17 @@
             <van-divider :style="{ color: '#b9bbc0' }">介绍</van-divider>
             <div class="content"  v-html="gooddetail.content"></div>
         </div>
+        <van-goods-action>
+                <van-goods-action-icon icon="cart-o" text="购物车" badge="" />
+                <van-goods-action-icon icon="shop-o" text="店铺" badge="" />
+                <van-goods-action-button type="warning" text="加入购物车" />
+                <van-goods-action-button type="danger" text="立即购买" />
+        </van-goods-action>
     </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem,Divider ,Stepper  } from 'vant';
+import { Swipe, SwipeItem,Divider ,Stepper,GoodsAction, GoodsActionIcon, GoodsActionButton  } from 'vant';
 import {getdetaillunbo,getdetailinfo} from "@/api/index.js";
     export default {
         data(){
@@ -66,7 +72,7 @@ import {getdetaillunbo,getdetailinfo} from "@/api/index.js";
         created(){
             this.$parent.title ="商品详情";
             this.$parent.bool = false;
-            // this.$parent.flag = false;
+            this.$parent.flag = false;
             this.getlunbo();
             this.getdetail();
             
@@ -75,7 +81,10 @@ import {getdetaillunbo,getdetailinfo} from "@/api/index.js";
             "van-swipe":Swipe,
             "van-swipe-item":SwipeItem,
             "van-divider":Divider,
-            "van-stepper":Stepper
+            "van-stepper":Stepper,
+            "van-goods-action":GoodsAction,
+            "van-goods-action-icon":GoodsActionIcon,
+            "van-goods-action-button":GoodsActionButton
         }
     }
 </script>

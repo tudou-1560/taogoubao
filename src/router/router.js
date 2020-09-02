@@ -10,6 +10,7 @@ import newlist from "@/components/news/newlist.vue";
 import goodslist from "@/components/goods/goodslist.vue";
 import goodsdesc from "@/components/goods/goodsdesc.vue";
 import newsdesc from "@/components/news/newdesc.vue";
+import photolist from "@/components/photo/photoshow.vue";
 const router = new VueRouter({
   routes :[
     {path: '/', redirect: 'home'},
@@ -20,6 +21,7 @@ const router = new VueRouter({
     {path: '/goodslist',component:goodslist},
     {path : '/goodsdesc/:goodId',component:goodsdesc},
     {path : '/getnewdetail/:newId',component:newsdesc},
+    {path : '/photolist',component:photolist},
 
   ]
 })

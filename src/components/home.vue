@@ -16,7 +16,7 @@
         <img src="../assets/images/menu19.png" alt />
         <span>乐淘头条</span>
       </van-grid-item>
-      <van-grid-item icon="photo-o">
+      <van-grid-item icon="photo-o" to="/photolist">
         <img src="../assets/images/menu18.png" alt />
         <span>美图欣赏</span>
       </van-grid-item>

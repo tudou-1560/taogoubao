@@ -1,10 +1,13 @@
 <template>
     <div>
         个人中心 
+        
+
     </div>
 </template>
 
 <script>
+    import { ImagePreview } from 'vant';
     export default {
         data(){
             return{

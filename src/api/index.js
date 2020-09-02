@@ -40,3 +40,17 @@ export function getcommentdata(id,pageindex){
 export function postcommentdata(id){
   return instance.post(`./postcomment/${id}`)
 }
+
+// 获取图片分享类型
+export function getphotocategory(){
+  return instance.get(`./getcategory`)
+}
+
+//获取指定类型进入列表数据
+export function getcategorylisdata(id){
+  return instance.get(`./getcatelist/${id}`);
+}
+//获取指定id的缩略图
+export function getthumbdata(id){
+  return instance.get(`./getthumbimages/${id}`);
+}
