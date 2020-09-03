@@ -22,7 +22,7 @@
     <!-- 底部 -->
         <van-tabbar v-model="active"  :route="true" v-if="flag">
           <van-tabbar-item to="/home" icon="wap-home-o">首页</van-tabbar-item>
-          <van-tabbar-item to="/mycar" icon="cart-o" badge="0" >购物车</van-tabbar-item>
+          <van-tabbar-item to="/mycar" icon="cart-o" :badge="this.$store.getters.totalCart" >购物车</van-tabbar-item>
           <van-tabbar-item to="/userinfo" icon="user-o" >我的乐淘</van-tabbar-item>
         </van-tabbar>
 
