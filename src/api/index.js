@@ -54,3 +54,8 @@ export function getcategorylisdata(id){
 export function getthumbdata(id){
   return instance.get(`./getthumbimages/${id}`);
 }
+
+//获取购物车商品数据
+export function getshopcartdata(id){
+  return instance.get(`./getshopcarlist/${id}`);
+}
