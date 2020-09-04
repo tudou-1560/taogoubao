@@ -10,7 +10,7 @@
             />
             <van-divider :style="{ color: '#333', borderColor: '#333', padding: '0 16px' }">购买的商品</van-divider>
             
-            {{$store.getters.getGoodNumber}}
+            <!-- {{$store.getters.getGoodNumber}} -->
             <div class="car-list">
                 <div class="car-item" v-for="(item,index) in cartData" :key="item.id">
                     
@@ -37,7 +37,10 @@
                 </div>
             </div>
                 <!-- 微信支付 -->
-                <van-cell title="微信支付" icon="cash-back-record" />
+                <van-cell title="微信支付" icon="cash-back-record" @click="showImg" />
+                <van-popup v-model="show">
+                    <img style="width:200px;height:200px" src="../assets/images/wechatpay.png" alt="">
+                </van-popup>
                 <!-- 提交订单 -->
                 <van-submit-bar :price="$store.getters.getGoodSelectedPrice" button-text="提交订单" @submit="onSubmit">
                     <template #default>
@@ -47,6 +50,7 @@
                         当前只支持微信支付，请用微信进行支付
                     </template>
                 </van-submit-bar>
+                
       </div>
     <!-- 购物车为空时显示 -->
     <div class="car-empty" v-else>
@@ -55,7 +59,7 @@
         <router-link to="/home">首页</router-link>逛逛吧!
       </h3>
       <div class="car-img">
-        <img src="../assets/images/car.png" alt />
+        <img  src="../assets/images/car.png" alt />
       </div>
       <div class="login">
         <router-link to="login">登录</router-link>后可以同步电脑与手机购物车中的商品
@@ -65,7 +69,7 @@
 </template>
 
 <script>
-import { Divider,AddressList ,Toast,Switch,Stepper,Button,Cell,SubmitBar} from "vant";
+import { Divider,AddressList ,Toast,Switch,Stepper,Button,Cell,SubmitBar,Popup } from "vant";
 import {getshopcartdata} from "@/api/index.js";
 export default {
   data() {
@@ -73,6 +77,7 @@ export default {
         cartData:[],
         // checked:true,
         // value:"1",
+        show:false,
         chosenAddressId: '1',
         list: [
             {
@@ -86,6 +91,9 @@ export default {
     };
   },
   methods: {
+    showImg(){
+        this.show = true;
+    },
     onSubmit(){
             Toast.loading({
                 message: '订单生成中...',
@@ -129,7 +137,8 @@ export default {
     "van-stepper":Stepper,
     "van-button":Button,
     "van-cell":Cell,
-    "van-submit-bar":SubmitBar
+    "van-submit-bar":SubmitBar,
+    "van-popup":Popup
   },
 };
 </script>
