@@ -1,13 +1,14 @@
 
 import instance from "./config.js";
-
+//获取轮播图数据
 export  function getLunBoData(){
     return  instance.get("./getlunbo")
 }
-
+//获取首页推荐商品数据
 export  function getGoodsData(limit){
     return  instance.get(`./recommend?limit=${limit}`)
 }
+//获取新闻列表数据
 export  function getNewsData(page=1,pagesize=5){
     return  instance.get(`./getnewslist?page=${page}&pagesize=${pagesize}`)
 }
@@ -58,4 +59,42 @@ export function getthumbdata(id){
 //获取购物车商品数据
 export function getshopcartdata(id){
   return instance.get(`./getshopcarlist/${id}`);
+}
+
+//请求登录接口
+export function getLogin(data){
+  return instance.post(`./login`,data);
+}
+
+//验证token 判断用户是否登录
+export async function isLogin(){
+  let token = localStorage.getItem("token")
+  try {
+    await instance.post(`./checktoken?token=${token}`);
+  } catch (error) {
+    
+  }
+}
+
+//请求用户的所有地址
+export function getAddressManager(userId){
+  return instance.get(`./getaddress/${userId}?v=${Math.random()}`);
+  // return instance.get(`./getaddress/${userId}`);
+}
+
+//添加地址接口
+export function AddAddress(userId,addressData){
+  return instance.post(`./addaddress/${userId}`,addressData);
+}
+
+
+//删除用户指定的地址
+export function deleteAddress(userId){
+  return instance.post(`./deladdress/${userId}`);
+}
+
+
+//请求注册接口
+export function getRegister(data){
+  return instance.post(`./register`,data);
 }

@@ -8,7 +8,7 @@
           <van-search v-model="value" placeholder="请输入搜索关键词" />
         </div>
 
-        <div v-else>
+        <div  v-else>
             <van-nav-bar 
                 :title="title"
                 left-text="返回"

@@ -1,7 +1,8 @@
 
 //封装axios接口处理请求
 import axios from "axios";
-
+import  {Toast} from "vant";
+import router from "@/router/router.js"
 const instance = axios.create({
     baseURL: 'http://api.w0824.com/api'
 });
@@ -9,6 +10,11 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
+
+    let token = localStorage.getItem("token") || "";
+    token && (config.headers.token = token);
+    //清除浏览器端的缓存
+    // config.headers['If-Modified-Since'] = 0;
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -18,10 +24,21 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
     // 对响应数据做点什么
+    
     return response.data;
 }, function (error) {
     // 对响应错误做点什么
-    return Promise.reject(error);
+    let status = error.response.status;
+    console.log(status);
+    switch(status){
+        case 401:
+        Toast("用户信息过期,请重新登录")
+        router.push("/login");
+        break;
+        default:
+            Toast("网络错误，请稍后再试");
+    }
+    // return Promise.reject(error);
 });
 
 
