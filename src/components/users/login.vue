@@ -1,6 +1,5 @@
 <template>
   <div class="login-container">
-    <!-- <van-nav-bar :title="title" /> -->
     <div class="login-top">
       <van-form @submit="onSubmit">
         <van-field
@@ -36,23 +35,17 @@ import {getLogin} from "@/api/index.js";
 export default {
   data() {
     return {
-      // title: "登录",
       username: "",
       password: "",
     };
   },
   methods: {
     async onSubmit(values) {
-      Toast.loading({
-        message: "加载中...",
-        forbidClick: true,
-      });
-        // console.log(values);
+      // Toast.loading({
+      //   message: "加载中...",
+      //   forbidClick: true,
+      // });
       let {status,message,userInfo,token} = await getLogin(values);
-      // console.log(status);
-      // console.log(message);
-      // console.log(userInfo);
-      // console.log(token);
       Toast.clear();
       Toast(message);
       if(status == 0){
@@ -71,8 +64,8 @@ export default {
   },
   created() {
     this.$parent.title = "登录"
-    this.$parent.bool = false
-    this.$parent.flag = false
+    this.$parent.bool = false;
+    this.$parent.flag = false;
   },
 };
 </script>

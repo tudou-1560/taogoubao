@@ -87,6 +87,10 @@ export function AddAddress(userId,addressData){
   return instance.post(`./addaddress/${userId}`,addressData);
 }
 
+// 更新用户地址
+export function updateAddAddress(userId,addressData){
+  return instance.post(`./updateaddress/${userId}`,addressData);
+}
 
 //删除用户指定的地址
 export function deleteAddress(userId){

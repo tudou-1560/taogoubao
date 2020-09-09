@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
-    <!-- <van-nav-bar :title="title"  /> -->
-    <div class="login-top">
+    <div class="login-top"> 
       <van-form @submit="onSubmit">
         <van-field
           v-model="username"

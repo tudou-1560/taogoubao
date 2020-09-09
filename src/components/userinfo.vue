@@ -78,13 +78,13 @@ export default {
     "van-button": Button,
   },
   created() {
+    isLogin();
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
     this.username = userInfo.username;
     this.$parent.title = "个人中心";
     this.$parent.bool = false;
     this.$parent.flag = false;
     this.$parent.active = 2;
-    isLogin();
   },
 };
 </script>

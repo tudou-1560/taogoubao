@@ -8,7 +8,7 @@
           <van-search v-model="value" placeholder="请输入搜索关键词" />
         </div>
 
-        <div  v-else>
+        <div v-else>
             <van-nav-bar 
                 :title="title"
                 left-text="返回"
@@ -17,20 +17,21 @@
             />
         </div>
     </van-sticky>
-
-    <router-view></router-view>
+    <!-- 用于引入显示其他组件 -->
+    <keep-alive >
+      <router-view></router-view>
+    </keep-alive>
     <!-- 底部 -->
-        <van-tabbar v-model="active"  :route="true" v-if="flag">
+        <van-tabbar v-model="active" :route="true" v-if="flag">
           <van-tabbar-item to="/home" icon="wap-home-o">首页</van-tabbar-item>
           <van-tabbar-item to="/mycar" icon="cart-o" :badge="this.$store.getters.totalCart" >购物车</van-tabbar-item>
           <van-tabbar-item to="/userinfo" icon="user-o" >我的乐淘</van-tabbar-item>
         </van-tabbar>
-
   </div>
 </template>
 
 <script>
-import { Search, Tabbar, TabbarItem, Sticky ,NavBar  } from "vant";
+import { Search, Tabbar, TabbarItem, Sticky ,NavBar,Toast  } from "vant";
 export default {
   data() {
     return {
@@ -41,6 +42,11 @@ export default {
       flag:true,
 
     };
+  },
+  computed:{
+    isPending:function(){
+      return this.$store.state.isPending;
+    }
   },
   methods:{
     onClickLeft(){
@@ -53,8 +59,6 @@ export default {
     "van-tabbar-item": TabbarItem,
     "van-sticky": Sticky,
     "van-nav-bar":NavBar,
-    
-
   },
   // watch:{
   //   "$route":function(oldPath,newPath){
@@ -84,8 +88,21 @@ export default {
       }else{
         this.flag = true;
       }
+    },
+
+    "isPending":function(isPending){
+      console.log(isPending);
+      isPending ?
+        Toast.loading({
+        message: "loading...",
+        forbidClick: true,
+      })
+      :Toast.clear()
+
     }
-  }
+  },
+  
+  
 }
 </script>
 

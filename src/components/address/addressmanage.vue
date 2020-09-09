@@ -39,7 +39,7 @@ export default {
       this.$router.push("/addressadd");
     },
     onEdit(item, index) {
-      console.log(item);
+      // console.log(item);
 
       let addressStr = JSON.stringify(item);
       this.$router.push(`/addressedit/${addressStr}`)

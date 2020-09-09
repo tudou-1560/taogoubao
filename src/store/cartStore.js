@@ -7,9 +7,13 @@ Vue.use(vuex);
 var cartData = JSON.parse(localStorage.getItem("carData") || "[]"); 
 var store = new vuex.Store({
     state:{
-        cartData:cartData
+        cartData:cartData,
+        isPending:false
     },
     mutations:{
+        changePending(state,bool){
+            state.isPending = bool;
+        },
         addCart(state,goods){
             // var index;
             // let hasGood = state.cartData.some((item,k)=>{
