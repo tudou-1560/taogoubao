@@ -34,6 +34,7 @@
 import { getGoodslistData } from "@/api/index.js";
 import { PullRefresh, Button, Toast } from "vant";
 export default {
+  name:"goodlist-components",
   data() {
     return {
       goodlist: [],
@@ -95,7 +96,7 @@ export default {
     console.log("activated");
   },
    deactivated:function(){
-     this.$parent.bool = true;
+    this.$parent.bool = true;
     console.log('deactivated')
   },
 };

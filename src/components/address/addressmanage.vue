@@ -23,7 +23,7 @@ export default {
     async loadMoreAddress(){
 
         let userInfo = JSON.parse( localStorage.getItem("userInfo"));
-        let userAddress = await getAddressManager(userInfo.id)
+        let userAddress = await getAddressManager(userInfo.id);
         let _this = this;
         // console.log(userAddress);
         userAddress.map(v=>{

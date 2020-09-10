@@ -34,6 +34,7 @@ export default {
   methods: {
     //保存修改
     async onSave(addressInfo) {
+      console.log(addressInfo);
       addressInfo.areaCode = this.areaCode;
       addressInfo.isDefault = this.isDefault;
       addressInfo.country = addressInfo.county;

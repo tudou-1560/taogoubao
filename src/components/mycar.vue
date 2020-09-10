@@ -3,7 +3,7 @@
     <div v-if="hasData">
       <!-- 购物车商品 -->
       <van-divider :style="{ color: '#333', borderColor: '#333', padding: '0 16px' }">收获地址</van-divider>
-      <van-address-list v-model="chosenAddressId" :list="list" default-tag-text="默认" />
+      <van-address-list v-model="chosenAddressId" :list="list" @edit="onEdit"  default-tag-text="默认" />
       <van-divider :style="{ color: '#333', borderColor: '#333', padding: '0 16px' }">购买的商品</van-divider>
 
       <!-- {{$store.getters.getGoodNumber}} -->
@@ -74,7 +74,7 @@ import {
   SubmitBar,
   Popup,
 } from "vant";
-import { getshopcartdata } from "@/api/index.js";
+import { getshopcartdata, getAddressManager } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -83,27 +83,24 @@ export default {
       // value:"1",
       show: false,
       chosenAddressId: "1",
-      list: [
-        {
-          id: "1",
-          name: "张三",
-          tel: "13000000000",
-          address: "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
-          isDefault: true,
-        },
-      ],
+      list: [],
     };
   },
   methods: {
     showImg() {
       this.show = true;
     },
+    //生成订单
     onSubmit() {
       Toast.loading({
         message: "订单生成中...",
         forbidClick: true,
       });
     },
+    onEdit(item, index) {
+      Toast("编辑地址:" + index);
+    },
+    //获取购物车商品
     async getCarGoods() {
       let id = this.$store.getters.getGoodsId;
       if (id == false) {
@@ -112,15 +109,36 @@ export default {
       let { message } = await getshopcartdata(id);
       this.cartData = message;
     },
+    //修改购物车商品按钮状态
     switchSelect(goodsId, selected) {
       this.$store.commit("changeGoodSelected", { goodsId, selected });
     },
+    //修改购物车商品数量
     changeNumber(goodsId, number) {
       this.$store.commit("changeGoodNumber", { goodsId, number });
     },
+    // 删除购物车商品
     delGood(goodsId, index) {
       this.$store.commit("delCartGood", goodsId);
       this.cartData.splice(index, 1);
+    },
+    //获取用户的默认地址
+    async loadaddress(){
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      // console.log(userId.id);
+      let userAddress = await getAddressManager(userInfo.id);
+      let _this = this;
+      let newAddress = userAddress.filter((v) => {
+          v.address = v.province + v.city + v.country + v.addressDetail;
+          if (v.isDefault == 1) {
+            v.isDefault = true;
+            _this.chosenAddressId = v.id;
+          }
+           return v.isDefault;
+      });
+
+      // this.list = newAddress; 
+      this.list.push(newAddress[0]); 
     },
   },
   computed: {
@@ -133,6 +151,7 @@ export default {
     this.$parent.bool = false;
     this.$parent.active = 1;
     this.getCarGoods();
+    this.loadaddress();
   },
   components: {
     "van-divider": Divider,
@@ -155,8 +174,8 @@ export default {
   .van-address-list__bottom {
     visibility: hidden;
   }
-  .van-submit-bar{
-      margin-bottom: 50px;
+  .van-submit-bar {
+    margin-bottom: 50px;
   }
 
   .car-list {

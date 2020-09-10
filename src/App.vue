@@ -18,7 +18,7 @@
         </div>
     </van-sticky>
     <!-- 用于引入显示其他组件 -->
-    <keep-alive >
+    <keep-alive include="goodlist-components,newlist-components">
       <router-view></router-view>
     </keep-alive>
     <!-- 底部 -->
@@ -91,7 +91,7 @@ export default {
     },
 
     "isPending":function(isPending){
-      console.log(isPending);
+      // console.log(isPending);
       isPending ?
         Toast.loading({
         message: "loading...",
