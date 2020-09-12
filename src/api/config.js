@@ -5,9 +5,11 @@ import  {Toast} from "vant";
 import router from "@/router/router.js";
 import store from "@/store/cartStore.js";
 import {sleep} from "@/util/tools.js";
+console.log(process.env.VUE_APP_TITLE);
 const instance = axios.create({
     // baseURL: 'http://api.w0824.com/api'
-    baseURL: 'http://47.107.76.61:6868/api'
+    // baseURL: 'http://47.107.76.61:6868/api'
+    baseURL:process.env.VUE_APP_apiurl,
 });
 
 // 添加请求拦截器
