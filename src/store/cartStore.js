@@ -28,7 +28,7 @@ var store = new vuex.Store({
                 // state.cartData[index].number  += goods.number;
                 state.cartData[hasGood].number  += goods.number;
             }else{
-                state.cartData.push(goods)
+                state.cartData.push(goods);
             }
             localStorage.setItem("carData",JSON.stringify(state.cartData))
         },
@@ -113,7 +113,15 @@ var store = new vuex.Store({
                 }
             })
             return count*100;
-        }
+        },
+        //获取选中商品的id
+        getSelectedGoodsId(state){
+            let ids = [];
+            state.cartData.map(v=> v.selected && ids.push(v.id))
+            var str = ids.join(",");
+            return str;
+        },
+
     }
     
 })

@@ -74,7 +74,8 @@ import {
   SubmitBar,
   Popup,
 } from "vant";
-import { getshopcartdata, getAddressManager } from "@/api/index.js";
+import { getshopcartdata, getAddressManager,getCommitorder } from "@/api/index.js";
+import { userInfo,getOrderId } from "@/util/tools.js";
 export default {
   data() {
     return {
@@ -91,11 +92,36 @@ export default {
       this.show = true;
     },
     //生成订单
-    onSubmit() {
+    async onSubmit() {
+      //校验用户是否有登录
+      let user = userInfo();
+      if(user === false){
+        Toast("您还没有登录，请进行登录");
+        return this.$router.push("/login");
+      }
+      //获取订单号
+      let orderId = getOrderId();
+
+      let orderDate = {
+        user_id:user.id,
+        order_id:orderId,
+        address_id:this.list[0].id,
+        total_price:this.total_price,
+        number:this.number,
+        goods_ids:this.goods_ids
+      }
+      // console.log(orderId);
+      // console.log(orderDate);
       Toast.loading({
-        message: "订单生成中...",
+        message: "支付中...",
         forbidClick: true,
+        duration:3500
       });
+
+      let res = await getCommitorder(orderDate);
+      let weChatPay = res.data;
+      console.log(res);
+      location.href = weChatPay;
     },
     onEdit(item, index) {
       Toast("编辑地址:" + index);
@@ -145,6 +171,20 @@ export default {
     hasData() {
       return this.cartData.length > 0;
     },
+  //获取商品总价格
+    total_price:function(){
+      return this.$store.getters.getGoodSelectedPrice
+    },
+    //获取选中商品总数量
+    number:function(){
+      return this.$store.getters.getGoodSelectedNumber
+    },
+    //获取购买的商品的id
+    goods_ids:function(){
+      return this.$store.getters.getSelectedGoodsId
+    }
+
+
   },
   created() {
     this.$parent.title = "我的购物车";

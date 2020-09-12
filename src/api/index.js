@@ -97,6 +97,16 @@ export function deleteAddress(userId){
   return instance.post(`./deladdress/${userId}`);
 }
 
+//生成订单接口请求
+export function getCommitorder (data){
+  return instance.post(`./commitorder`,data);
+}
+
+//获取指定用户的订单信息
+export function getOrderInfo (userId){
+  return instance.post(`./userorder/${userId}`);
+}
+
 
 //请求注册接口
 export function getRegister(data){
